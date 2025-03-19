@@ -5,16 +5,17 @@
 //  Created by Andrej Bachvarovski on 2025-03-13.
 //
 
+// comp3097_projectApp.swift
 import SwiftUI
 
 @main
 struct comp3097_projectApp: App {
-    let persistenceController = PersistenceController.shared
-
+    @StateObject private var taskViewModel = TaskViewModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(taskViewModel)
         }
     }
 }

@@ -2,7 +2,7 @@
 //  TaskIndividual.swift
 //  comp3097-project
 //
-//  Created by Teniel Smith-Edwards on 2025-03-19.
+//  Updated by Teniel Smith-Edwards on 2025-03-19.
 //
 
 import SwiftUI
@@ -12,7 +12,7 @@ struct TaskIndividual: View {
     @ObservedObject var taskViewModel: TaskViewModel
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 8) { // displays individual task - task name, description, and due date also redirects user to a edit screen for the individual task
             HStack {
                 Text("Task: ")
                     .fontWeight(.bold)
@@ -41,6 +41,7 @@ struct TaskIndividual: View {
             
             Spacer()
             
+            // sends user to edit task screen
             NavigationLink(destination: AddNewTask(task: task, isEditing: true).environmentObject(taskViewModel)) {
                 Text("Edit Task")
                     .font(.title2)

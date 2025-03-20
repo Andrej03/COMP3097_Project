@@ -14,22 +14,23 @@ struct TaskListView: View {
     
     var body: some View {
         NavigationView {
-            List {
+            List { // Displays each task as a list item in the task list view
                 ForEach(taskViewModel.tasks) { task in
                     TaskIndividual(task: task, taskViewModel: taskViewModel)
                 }
             }
             .navigationTitle("Task List")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden(true)
+            .navigationBarTitleDisplayMode(.inline) // have the navigation bar on one level
+            .navigationBarBackButtonHidden(true) // hides back button
+            // navigates to add task view when user taps on the plus sign
             .navigationBarItems(trailing: NavigationLink(destination: AddNewTask().environmentObject(taskViewModel)) {
-                Image(systemName: "plus")
+                Image(systemName: "plus") // displays plus sign - represents add a task
                     .font(.title2)
                     .foregroundColor(.cyan)
-                    .accessibilityLabel("Add Task")
+                    .accessibilityLabel("Add Task") // voiceover and hover label
                 }
             )
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        //.navigationViewStyle(StackNavigationViewStyle()) // disables back swiping on iPads
     }
 }

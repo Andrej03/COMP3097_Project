@@ -11,8 +11,10 @@ struct LauncherView: View {
     var body: some View {
         NavigationView {
             VStack {
+                // Spacer used above and below text to push the text to the middle of the screen
                 Spacer()
                 
+                // Welcome text
                 Text("Welcome to Your To-Do App")
                     .font(.largeTitle)
                     .fontWeight(.bold)
@@ -22,7 +24,8 @@ struct LauncherView: View {
 
                 Spacer()
 
-                NavigationLink(destination: TaskListView().navigationBarBackButtonHidden(true)) {
+                // Navigates user to the Task List page - through manual navigation
+                NavigationLink(destination: TaskListView().navigationBarBackButtonHidden(true)) { // disables back button so the user cannot go back to the launcher
                     Text("View Tasks")
                         .font(.title)
                         .padding()
@@ -34,7 +37,7 @@ struct LauncherView: View {
                 .padding(.bottom, 50)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.black.ignoresSafeArea())
+            .background(Color.black.ignoresSafeArea()) // enables the background color to black on the whole screen
         }
     }
 }

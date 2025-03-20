@@ -1,10 +1,3 @@
-//
-//  AddNewTask.swift
-//  comp3097-project
-//
-//  Created by Andrej Bachvarovski on 2025-03-19.
-//
-
 import SwiftUI
 
 struct AddNewTask: View {
@@ -39,16 +32,66 @@ struct AddNewTask: View {
                     TextField("Description", text: $description)
                     DatePicker("Due Date", selection: $dueDate,
                                displayedComponents: .date)
-                            
+                    
+                }
+                
+                Section(header: Text("Status")){
+                    Picker("Status", selection: $status) {
+                        ForEach(TaskStatus.allCases) { status in
+                            Text(status.rawValue).tag(status)
                         }
                     }
+                    .pickerStyle(.wheel)
+                }
+            }
+            .navigationTitle(isEditing ? "Edit Task" : "Add Task")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        if !isEditing && !title.isEmpty {
+                            taskViewModel.addTask(title: title, description: description, dueDate: dueDate, status: status)
+                        }
+                        dismiss()
+                    }) {
+                        Image(systemName: "plus")
+                            .foregroundColor(.blue)
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.red)
+                    }
+                }
+                
+                ToolbarItem(placement: .bottomBar) {
+                    Button(isEditing ? "Save Changes" : "Add Task") {
+                        if isEditing, let task = task {
+                            taskViewModel.updateTask(task: task, title: title, description: description, dueDate: dueDate, status: status)
+                        } else {
+                            taskViewModel.addTask(title: title, description: description, dueDate: dueDate, status: status)
+                        }
+                        dismiss()
+                    }
+                    .disabled(title.isEmpty)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+                    .padding(.horizontal)
                 }
             }
         }
+    }
+}
 
 struct AddNewTask_Previews: PreviewProvider {
     static var previews: some View {
         AddNewTask()
-           .environmentObject(TaskViewModel())
+            .environmentObject(TaskViewModel())
     }
 }

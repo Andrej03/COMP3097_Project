@@ -1,36 +1,55 @@
 // The Model where we build the functionality for the task
 // CREATE, UPDATE, DELETE, SAVE ...
 
+import Foundation
 import SwiftUI
 import Combine
-import Foundation
 
 class TaskViewModel: ObservableObject {
-    @Published var tasks: [Task] = [
-        Task(title: "COMP3097 - Lab Exercise 1", description: "Solve some tasks using SwiftUI in a swift playground.", dueDate: Date(), status: TaskStatus(rawValue: "Done")!)
-    ]
+    @Published var tasks: [Task] = []
+    
+    private let saveKey = "SavedTasks"
     
     init() {
         loadTasks()
     }
     
-    func createTask(title: String) {
-        
+    // Make new Task with satisfied fields
+    func addTask(title: String, description: String, dueDate: Date, status: TaskStatus) {
+        let task = Task(title: title, description: description, dueDate: dueDate, status: status)
+        tasks.append(task)
+        saveTasks()
     }
     
-    func updateTask(id: Int, title: String) {
-        
+    // Change of information to a task already set
+    func updateTask(task: Task, title: String, description: String, dueDate: Date, status: TaskStatus) {
+        if let indexTasks = tasks.firstIndex(where: { $0.id == task.id }) {
+            tasks[indexTasks].title = title
+            tasks[indexTasks].description = description
+            tasks[indexTasks].dueDate = dueDate
+            tasks[indexTasks].status = status
+            saveTasks()
+        }
     }
     
-    func deleteTask(id: Int) {
-        
+    // Task Removal
+    func deleteTask(at offsets: IndexSet) {
+        tasks.remove(atOffsets: offsets)
+        saveTasks()
     }
     
-    func saveTasks() {
-        
+    // Allow to save task features
+    private func saveTasks() {
+        if let encoded = try? JSONEncoder().encode(tasks) {
+            UserDefaults.standard.set(encoded, forKey: saveKey)
+        }
     }
     
-    func loadTasks() {
-        
+    // Task loader to show on screen
+    private func loadTasks() {
+        if let data = UserDefaults.standard.data(forKey: saveKey),
+           let decoded = try? JSONDecoder().decode([Task].self, from: data) {
+            tasks = decoded
+        }
     }
 }

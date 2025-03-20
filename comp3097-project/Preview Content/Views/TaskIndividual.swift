@@ -1,18 +1,16 @@
-//
-//  TaskIndividual.swift
-//  comp3097-project
-//
-//  Updated by Teniel Smith-Edwards on 2025-03-19.
-//
-
 import SwiftUI
 
+// The project uses MVC structure code where it allows for developers to make specified structured code
+// The will only be used for the design feature
 struct TaskIndividual: View {
     var task: Task
     @ObservedObject var taskViewModel: TaskViewModel
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) { // displays individual task - task name, description, and due date also redirects user to a edit screen for the individual task
+        VStack(alignment: .leading, spacing: 8) { 
+            // displays individual task - task name, description, due date, and status
+            // following will also display the fixed style of a task on
+            // how it will be displayed.
             HStack {
                 Text("Task: ")
                     .fontWeight(.bold)

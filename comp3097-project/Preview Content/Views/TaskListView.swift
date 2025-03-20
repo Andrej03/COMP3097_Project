@@ -16,10 +16,20 @@ struct TaskListView: View {
         NavigationView {
             List {
                 ForEach(taskViewModel.tasks) { task in
-                    TaskRow(task: task, taskViewModel: taskViewModel)
+                    TaskIndividual(task: task, taskViewModel: taskViewModel)
                 }
             }
             .navigationTitle("Task List")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(trailing: NavigationLink(destination: AddNewTask().environmentObject(taskViewModel)) {
+                Image(systemName: "plus")
+                    .font(.title2)
+                    .foregroundColor(.cyan)
+                    .accessibilityLabel("Add Task")
+                }
+            )
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }

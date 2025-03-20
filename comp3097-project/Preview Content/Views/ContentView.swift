@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .environmentObject(TaskViewModel())
+    var body: some View {
+        TaskListView()
     }
-}   
+}
+
+#Preview {
+    ContentView()
+}

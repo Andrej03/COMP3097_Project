@@ -1,11 +1,3 @@
-//
-//  Task.swift
-//  comp3097-project
-//
-//  Created by Andrej Bachvarovski on 2025-03-19.
-//  Updated by Teniel Smith-Edwards on 2025-03-19.
-//
-
 import SwiftUI
 
 struct TaskListView: View {
@@ -14,9 +6,10 @@ struct TaskListView: View {
     
     var body: some View {
         NavigationView {
-            List { // Displays each task as a list item in the task list view
+            // Static scrollable test list display for the tasks
+            List {
                 ForEach(taskViewModel.tasks) { task in
-                    TaskIndividual(task: task, taskViewModel: taskViewModel)
+                    TaskIndividual(task: task, taskViewModel: taskViewModel) // TaskViewModel variables taken as parameters from the file
                 }
             }
             .navigationTitle("Task List")

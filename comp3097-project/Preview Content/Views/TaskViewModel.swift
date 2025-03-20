@@ -13,7 +13,9 @@ import Combine
 import Foundation
 
 class TaskViewModel: ObservableObject {
-    @Published var tasks: [Task] = []
+    @Published var tasks: [Task] = [
+        Task(title: "COMP3097 - Lab Exercise 1", description: "Solve some tasks using SwiftUI in a swift playground.", dueDate: Date(), status: TaskStatus(rawValue: "Done")!)
+    ]
     
     init() {
         loadTasks()

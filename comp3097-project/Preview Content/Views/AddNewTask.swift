@@ -3,7 +3,8 @@ import SwiftUI
 struct AddNewTask: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var taskViewModel: TaskViewModel
-    
+
+    // Model type variables 
     @State private var title: String = ""
     @State private var description: String = ""
     @State private var dueDate: Date = Date()
@@ -15,7 +16,8 @@ struct AddNewTask: View {
     init(task: Task? = nil, isEditing: Bool = false) {
         self.task = task
         self.isEditing = isEditing
-        
+
+        // Task sample structure to let the rest of the application know what steps to follow
         if let task = task {
             _title = State(initialValue: task.title)
             _description = State(initialValue: task.description)
@@ -26,6 +28,7 @@ struct AddNewTask: View {
     
     var body: some View {
         NavigationView {
+            // Form design feature to add internal services into the design feature
             Form {
                 Section(header: Text("Task Details")) {
                     TextField("Title", text: $title)
@@ -46,6 +49,7 @@ struct AddNewTask: View {
             }
             .navigationTitle(isEditing ? "Edit Task" : "Add Task")
             .toolbar {
+                // Add or Edit feature to allow the user to make new or update old task
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
                         if !isEditing && !title.isEmpty {
@@ -57,7 +61,7 @@ struct AddNewTask: View {
                             .foregroundColor(.blue)
                     }
                 }
-                
+                // Dismis or cancel task creatiion/edit 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         dismiss()
@@ -66,7 +70,7 @@ struct AddNewTask: View {
                             .foregroundColor(.red)
                     }
                 }
-                
+                // Testing feature to allow for task creation submition
                 ToolbarItem(placement: .bottomBar) {
                     Button(isEditing ? "Save Changes" : "Add Task") {
                         if isEditing, let task = task {

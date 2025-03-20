@@ -1,10 +1,3 @@
-//
-//  TaskViewModel.swift
-//  comp3097-project
-//
-//  Created by Andrej Bachvarovski on 2025-03-19.
-//
-
 // The Model where we build the functionality for the task
 // CREATE, UPDATE, DELETE, SAVE ...
 

@@ -52,4 +52,15 @@ class TaskViewModel: ObservableObject {
             tasks = decoded
         }
     }
+    
+    // Setup of alert notification for the task due tomorrow
+    func alertNotification() -> [Task] {
+            let calendar = Calendar.current
+            let todayStart = calendar.startOfDay(for: Date())
+        
+            // Calculate tomorrow's date by adding 1 day to today's start
+            guard let tomorrow = calendar.date(byAdding: .day, value: 1, to: todayStart) else { return [] }
+            // Return tasks with dueDate on the same day as tomorrow
+            return tasks.filter { calendar.isDate($0.dueDate, inSameDayAs: tomorrow) }
+    }
 }

@@ -3,6 +3,8 @@ import SwiftUI
 struct TaskListView: View {
     // Connects/Binds model to the view
     @ObservedObject var taskViewModel = TaskViewModel()
+    @State private var showAlert = false
+    @State private var alertNotificationMessage = ""
     
     var body: some View {
         NavigationView {
@@ -21,9 +23,28 @@ struct TaskListView: View {
                     .font(.title2)
                     .foregroundColor(.cyan)
                     .accessibilityLabel("Add Task") // voiceover and hover label
+                })
+            .onAppear {
+            // Check for tasks due tomorrow
+            let dueTomorrowTasks = taskViewModel.alertNotification()
+            if !dueTomorrowTasks.isEmpty {
+                let taskTitles = dueTomorrowTasks.map { $0.title }.joined(separator: ", ")
+                        alertNotificationMessage = "You have task(s) due tomorrow: \(taskTitles)"
+                        showAlert = true
+                    }
                 }
-            )
+                // Present an alert if tasks due tomorrow exist
+                .alert("Task Reminder", isPresented: $showAlert) {
+                    Button("OK", role: .cancel) { }
+                } message: {
+                    Text(alertNotificationMessage)
+                }
+            }
         }
-        //.navigationViewStyle(StackNavigationViewStyle()) // disables back swiping on iPads
+    }
+
+struct TaskListView_Preview: PreviewProvider {
+    static var previews: some View {
+        TaskListView()
     }
 }

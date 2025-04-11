@@ -18,12 +18,24 @@ struct TaskListView: View {
             .navigationBarTitleDisplayMode(.inline) // have the navigation bar on one level
             .navigationBarBackButtonHidden(true) // hides back button
             // navigates to add task view when user taps on the plus sign
-            .navigationBarItems(trailing: NavigationLink(destination: AddNewTask().environmentObject(taskViewModel)) {
-                Image(systemName: "plus") // displays plus sign - represents add a task
-                    .font(.title2)
-                    .foregroundColor(.cyan)
-                    .accessibilityLabel("Add Task") // voiceover and hover label
-                })
+            .navigationBarItems(trailing:
+                                    HStack{
+                //Add New Task Button
+                NavigationLink(destination: AddNewTask().environmentObject(taskViewModel)) {
+                    Image(systemName: "plus") // displays plus sign - represents add a task
+                        .font(.title2)
+                        .foregroundColor(.cyan)
+                        .accessibilityLabel("Add Task") // voiceover and hover label
+                }
+                // Search Button
+                NavigationLink(destination: searchTasksView(taskViewModel: taskViewModel)) {
+                    Image(systemName: "magnifyingglass")
+                        .font(.title2)
+                        .foregroundColor(.cyan)
+                        .accessibilityLabel("Search Tasks")
+                }
+            }
+            )
             .onAppear {
             // Check for tasks due tomorrow
             let dueTomorrowTasks = taskViewModel.alertNotification()

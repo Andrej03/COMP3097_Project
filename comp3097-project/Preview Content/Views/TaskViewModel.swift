@@ -5,11 +5,13 @@ import Foundation
 import SwiftUI
 import Combine
 
+// ViewModel to manage the list of tasks and their persistent storage
 class TaskViewModel: ObservableObject {
     @Published var tasks: [Task] = []
     
     private let saveKey = "SavedTasks"
-    
+
+     // Initialize and load previously saved tasks
     init() {
         loadTasks()
     }
@@ -32,7 +34,7 @@ class TaskViewModel: ObservableObject {
         }
     }
     
-    // Task Removal
+       // Delete a task from the list
     func deleteTask(_ task: Task) {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
             tasks.remove(at: index)

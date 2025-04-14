@@ -12,7 +12,10 @@ struct searchTasksView: View {
     @ObservedObject var taskViewModel = TaskViewModel()
     // state for search
     @State private var inputSearch: String = ""
-    
+    // Filter method to find tasks by title or description
+    // It returns only the tasks that contain the search input text (case-insensitive)
+    // If the search input is empty, it returns an empty list
+    // Johana Romero – 101445658
     var filteredSearchResults: [Task] {
         if inputSearch.isEmpty {
             return []

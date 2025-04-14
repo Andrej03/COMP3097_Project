@@ -17,7 +17,8 @@ struct AddNewTask: View {
         self.task = task
         self.isEditing = isEditing
 
-        // Task sample structure to let the rest of the application know what steps to follow
+        // If the view is used to edit a task, populate the fields with the existing data
+        // Johana Romero | ID: 101445658
         if let task = task {
             _title = State(initialValue: task.title)
             _description = State(initialValue: task.description)
@@ -49,7 +50,8 @@ struct AddNewTask: View {
             }
             .navigationTitle(isEditing ? "Edit Task" : "Add Task")
             .toolbar {
-                // Add or Edit feature to allow the user to make new or update old task
+                // Main submit button for either editing or creating a task
+                // — Johana Romero | ID: 101445658
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
                         if !isEditing && !title.isEmpty {

@@ -20,8 +20,8 @@ enum TaskStatus: String, CaseIterable, Identifiable, Codable {
     }
 }
 
-struct Task: Identifiable, Codable {
-    var id = UUID()
+struct Task: Identifiable, Codable, Equatable {
+    var id: UUID = UUID()
     var title: String
     var description: String = ""
     var dueDate: Date

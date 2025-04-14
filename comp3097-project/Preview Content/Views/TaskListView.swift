@@ -13,6 +13,7 @@ struct TaskListView: View {
                 ForEach(taskViewModel.tasks) { task in
                     TaskIndividual(task: task, taskViewModel: taskViewModel) // TaskViewModel variables taken as parameters from the file
                 }
+                //.onDelete(perform: taskViewModel.deleteTask)
             }
             .navigationTitle("Task List")
             .navigationBarTitleDisplayMode(.inline) // have the navigation bar on one level

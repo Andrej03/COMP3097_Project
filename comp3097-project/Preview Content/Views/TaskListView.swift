@@ -39,6 +39,8 @@ struct TaskListView: View {
             )
             .onAppear {
             // Check for tasks due tomorrow
+                // Other than the definition of tasks due tomorrow a user could also add
+                // a cusotom remider system (Andrej)
             let dueTomorrowTasks = taskViewModel.alertNotification()
             if !dueTomorrowTasks.isEmpty {
                 let taskTitles = dueTomorrowTasks.map { $0.title }.joined(separator: ", ")

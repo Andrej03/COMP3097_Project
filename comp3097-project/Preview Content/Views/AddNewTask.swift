@@ -64,6 +64,8 @@ struct AddNewTask: View {
                     }
                 }
                 // Dismis or cancel task creatiion/edit 
+                // Canecel could double as a delete feature when implmented 
+                // as a second way to erase task other than the potential gesture swipe. (Andrej)
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         dismiss()

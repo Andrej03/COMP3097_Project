@@ -5,7 +5,7 @@ enum TaskStatus: String, CaseIterable, Identifiable, Codable {
     case done = "Done"
     case inProgress = "In Progress"
     case notFinished = "Not Finished"
-    
+    // custome type should be here
     var id: String { self.rawValue }
     
     var color: Color {
@@ -21,6 +21,7 @@ enum TaskStatus: String, CaseIterable, Identifiable, Codable {
 }
 
 struct Task: Identifiable, Codable, Equatable {
+    // Initialization of ID as a fieldof UUID as previously not initiated (Andrej)
     var id: UUID = UUID()
     var title: String
     var description: String = ""

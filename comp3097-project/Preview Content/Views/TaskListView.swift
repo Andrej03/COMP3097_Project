@@ -45,7 +45,8 @@ struct TaskListView: View {
                         showAlert = true
                     }
                 }
-                // Present an alert if tasks due tomorrow exist
+               // Display an alert to notify the user about tasks due tomorrow
+               // Johana Romero – 101445658
                 .alert("Task Reminder", isPresented: $showAlert) {
                     Button("OK", role: .cancel) { }
                 } message: {

@@ -33,10 +33,11 @@ class TaskViewModel: ObservableObject {
     }
     
     // Task Removal
-    func deleteTask(at offsets: IndexSet) {
-        tasks.remove(atOffsets: offsets)
-        saveTasks()
-    }
+    func deleteTask(_ task: Task) {
+        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+            tasks.remove(at: index)
+            saveTasks()
+        }
     
     // Allow to save task features
     private func saveTasks() {

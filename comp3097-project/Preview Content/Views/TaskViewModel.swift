@@ -60,7 +60,9 @@ class TaskViewModel: ObservableObject {
         
             // Calculate tomorrow's date by adding 1 day to today's start
             guard let tomorrow = calendar.date(byAdding: .day, value: 1, to: todayStart) else { return [] }
-            // Return tasks with dueDate on the same day as tomorrow
+             // Returns a filtered list of tasks whose due date matches tomorrow's date.
+            // This filter helps to show alert notifications for tasks that are due the next day.
+            // Johana Romero | ID: 101445658
             return tasks.filter { calendar.isDate($0.dueDate, inSameDayAs: tomorrow) }
     }
 }
